@@ -8,23 +8,27 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
+    // Inversement du chevron pour obtenir un ordre décroissant
   );
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
+        () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), 5000
+        // retrait de 1 pour ne plus dépasser du tableau
     );
-  };
-  useEffect(() => {
-    nextCard();
-  });
+};
+useEffect(() => {
+    if (byDateDesc) {
+        nextCard();
+    }
+});
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
         <>
           <div
             key={event.title}
+            // Changement de la key
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -42,10 +46,10 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx} // Remplacement de "idx" par "index" car idx est l'index du premier map, ici nous voulons l'index de la slide
+                  readOnly // Correction d'une erreur console (un gestionnaire onChange est nécessaire avec la prop checked)
                 />
               ))}
             </div>

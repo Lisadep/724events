@@ -13,7 +13,10 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const { data } = useData() // Récupération des données
+  const last = data?.events.sort((evtA, evtB) =>
+    new Date(evtA.date) < new Date(evtB.date) ? 1 : -1)[0];
+    // Tri et affichage des évènements en fonction de leur date
   return <>
     <header>
       <Menu />
@@ -115,14 +118,16 @@ const Page = () => {
     </main>
     <footer className="row">
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
+        <h3>Notre dernière prestation</h3>
+        {data === null ? ("loading" ) : ( // Affichage de loading si data est null (erreur console disant que les données ci-dessous sont required mais undefined)
         <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
-          label="boom"
+          label={last?.type} // Affichage du type d'évènement dans le label
         />
+        )};
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -156,5 +161,4 @@ const Page = () => {
     </footer>
   </>
 }
-
-export default Page;
+export default Page
