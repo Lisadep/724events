@@ -116,7 +116,7 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre dernière prestation</h3>
-        {last === null ? ("loading" ) : ( // Affichage de loading si data est null (erreur console disant que les données ci-dessous sont required mais undefined)
+        {last && // Vérification que last existe avant d'utiliser EventCard (erreur console disant que les données ci-dessous sont required mais undefined)
         <EventCard
           imageSrc={last?.cover}
           title={last?.title}
@@ -124,7 +124,7 @@ const Page = () => {
           small
           label={last?.type} // Affichage du type d'évènement dans le label
         />
-        )};
+        };
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
