@@ -28,7 +28,7 @@ export const DataProvider = ({ children }) => {
     }
   }, []);
   useEffect(() => {
-    if (data) {
+    if (data && data.events) {
       setLast(data.events.sort((evtA, evtB) =>
       new Date(evtA.date) < new Date(evtB.date) ? -1 : 1)[0])
     // Tri et affichage des évènements en fonction de leur date

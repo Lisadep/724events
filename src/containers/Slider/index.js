@@ -44,8 +44,9 @@ useEffect(() => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {byDateDesc.map((dot, radioIdx) => (
                 <input
+                  key={`radio-${dot.title}`} // ajout d'un clé unique
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // Remplacement de "idx" par "index" car idx est l'index du premier map, ici nous voulons l'index de la slide
