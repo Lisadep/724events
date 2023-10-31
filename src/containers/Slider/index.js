@@ -22,18 +22,19 @@ useEffect(() => {
         nextCard();
     }
 });
-  return (
-    <div className="SlideCardList">
-      {byDateDesc?.map((event, idx) => (
-        <>
-          <div
+return (
+  <div className="SlideCardList">
+    {byDateDesc?.map((event, idx) => (
+      // Changement de place de la key
+      <div key={event.title}>
+        <div
             key={event.title}
             // Changement de la key
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
           >
-            <img src={event.cover} alt="forum" />
+          <img src={event.cover} alt="forum" />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
                 <h3>{event.title}</h3>
@@ -46,19 +47,19 @@ useEffect(() => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((dot, radioIdx) => (
                 <input
-                  key={`radio-${dot.title}`} // ajout d'un clé unique
+                  key={`radio-${dot.title}`} // ajout d'un clé
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // Remplacement de "idx" par "index" car idx est l'index du premier map, ici nous voulons l'index de la slide
                   readOnly // Correction d'une erreur console (un gestionnaire onChange est nécessaire avec la prop checked)
                 />
-              ))}
-            </div>
+            ))}
           </div>
-        </>
-      ))}
-    </div>
-  );
+        </div>
+      </div>
+    ))}
+  </div>
+);
 };
 
 export default Slider;
