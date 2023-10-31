@@ -16,7 +16,7 @@ const Slider = () => {
         () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), 5000
         // retrait de 1 pour ne plus dépasser du tableau
     );
-};
+  };
 useEffect(() => {
     if (byDateDesc) {
         nextCard();
@@ -47,7 +47,7 @@ return (
             <div className="SlideCard__pagination">
               {byDateDesc.map((dot, radioIdx) => (
                 <input
-                  key={`radio-${dot.title}`} // ajout d'un clé
+                  key={`radio-${dot.title}`} // changement de la key pour la rendre unique
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // Remplacement de "idx" par "index" car idx est l'index du premier map, ici nous voulons l'index de la slide

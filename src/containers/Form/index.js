@@ -5,7 +5,6 @@ import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 600); })
-// Modification de setTimeout (Unable to find an element with the text: Envoyer)
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
